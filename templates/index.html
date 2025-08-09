@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Generador de QR WIFI</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<!--<link rel="stylesheet" href="style.css"/>-->
+		<script src="{{ url_for('static', filename='form-js.js') }}"></script>
+		<!--<script src="form-js.js"></script>-->
+	</head>
+	<body>
+		<h2>Generador de código QR para WIFI</h2>
+		<div id="top">
+			<p id="E1">Error: Ingrese un nombre válido para la red.</p>
+			<p id="E2">Error: Ingrese una clave.</p>
+			<p id="E3">Error: Seleccione un tipo de seguridad.</p>
+			<p id="E4">Error: Problema en el valor de "red oculta"</p>
+		</div>
+		<br>
+		<div id="main">
+			<div id="info">
+				<form id="formulario" method="POST">
+					<label for="Nmbr">Nombre de la red:</label><br>
+					<input type="text" name="Nombre" id="Nmbr" placeholder="Mi red"><br>
+					<label for="pswrd">Clave:</label><br>
+					<input type="text" name="Clave" id="pswrd" placeholder="Clave"><br>
+					<label for="sec">Seguridad:</label><br>
+					<select name="Seguridad" id="sec">
+						<option value="WPA">WPA/WPA2</option>
+						<option value="WEP">WEP</option>
+					</select><br>
+					<label>Red Oculta:
+						<select name="oculta" id="oc">
+							<option value="no">No</option>
+							<option value="yes">Sí</option>
+						</select>
+					</label><br>
+					<input type="button" value="Generar QR" onclick="Validar()">
+				</form>
+			</div>
+			<div id="qr">
+				{% if qr_code %}
+					<img src="{{ url_for('static', filename='qr.png') }}">
+				{% endif %}
+			</div>
+		</div>
+	</body>
+</html>
